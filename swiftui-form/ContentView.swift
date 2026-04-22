@@ -25,18 +25,38 @@ struct ContentView: View {
                 
                 Section(header: Text("Actions")) {
                     Toggle("Send Newsletter", isOn: $shouldSendNewsletter)
-                        .toggleStyle(SwitchToggleStyle(tint: .red))
+                        .toggleStyle(SwitchToggleStyle(tint: .green))
                     Stepper("Number of likes", value: $numberOfLikes, in:0...100)
                     Text("This video has  \(numberOfLikes) likes")
                     Link("Terms of Service", destination: URL(string: "https://virtual.unac.edu.co")!)
                 }
             }
-            .accentColor(.red)
             .navigationTitle("Account")
+            .toolbar {
+                ToolbarItemGroup(placement: .navigationBarTrailing) {
+                    Button{
+                        hideKeyboard()
+                    } label: {
+                        Image(systemName: "keyboard.chevron.compact.down")
+                    }
+                    Button("Save", action: saveUser)
+                }
+            }
         }
+        .tint(.blue)
     }
+}
+
+func saveUser(){
+    print("User saved")
 }
 
 #Preview {
     ContentView()
+}
+
+extension View {
+    func hideKeyboard(){
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
 }
