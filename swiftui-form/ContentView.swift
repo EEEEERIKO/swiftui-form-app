@@ -8,14 +8,19 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State private var firstName = ""
+    @State private var lastName = ""
+
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationView{
+            Form {
+                TextField("First Name", text: $firstName)
+                TextField("First Name", text: $lastName)
+
+            }
+            .navigationTitle("Account")
         }
-        .padding()
     }
 }
 
